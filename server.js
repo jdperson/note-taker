@@ -14,3 +14,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("./public"));
 
+// Get all notes from db
+app.get("/api/notes", (req, res) => {
+    readFromFile("./db/db.json")
+    .then((data) => res.json(JSON.parse(data)));
+})
