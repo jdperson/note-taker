@@ -36,3 +36,15 @@ app.post("/api/notes", (req, res) => {
     } else res.error("Error adding note");
 });
 
+// Delete a specific note by id from the db
+app.delete("/api/notes/:id", (req, res) => {
+    readFromFile("./db/db.json")
+    .then((data) => JSON.parse(data))
+    .then((json) => {
+        // Saves a new array that excludes the target note to the db
+        const result = json.filter((note) => note.id !== req.params.id);
+        writeToFile("./db/db.json", result);
+
+        res.json("Note deleted.");
+    });
+});
