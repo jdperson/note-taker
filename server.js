@@ -48,3 +48,20 @@ app.delete("/api/notes/:id", (req, res) => {
         res.json("Note deleted.");
     });
 });
+
+// Home page route
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "./public/index.html"));
+});
+
+// Notes page route
+app.get("/notes", (req, res) => {
+    res.sendFile(path.join(__dirname, "./public/notes.html"));
+});
+
+// Wildcard route
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "./public/index.html"));
+});
+
+app.listen(PORT, () => console.log(`Listening on ${PORT}`));
